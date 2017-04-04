@@ -3,15 +3,95 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.yesorno.MainActivity">
+    tools:context="com.example.yesorno.MainActivity"
+    android:divider="@drawable/fragment_separator"
+    android:dividerPadding="0dp"
+    android:showDividers="middle" >
 
-    <fragment
-        class="com.example.yesorno.BrainteaserCategoryFragment"
-        android:id="@+id/category_frag"
+
+<!--    <fragment
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"> -->
+
+    <LinearLayout
+
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        />
+        android:layout_weight="0.75"
+        android:adjustViewBounds="true"
+        android:divider="@drawable/button_separator"
+        android:dividerPadding="0dp"
+        android:orientation="vertical"
+        android:showDividers="middle" >
+
+        <ImageButton
+            android:id="@+id/category_1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:onClick="onButtonClick"
+            android:src="@mipmap/ic_launcher"
+            android:background="@android:color/transparent"/>
+        <ImageButton
+            android:id="@+id/category_2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:onClick="onButtonClick"
+            android:src="@mipmap/ic_launcher"
+            android:background="@android:color/transparent"/>
+        <ImageButton
+            android:id="@+id/category_3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:onClick="onButtonClick"
+            android:src="@mipmap/ic_launcher"
+            android:background="@android:color/transparent"/>
+        <ImageButton
+            android:id="@+id/category_4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:onClick="onButtonClick"
+            android:src="@mipmap/ic_launcher"
+            android:background="@android:color/transparent"/>
+        <ImageButton
+            android:id="@+id/category_5"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:onClick="onButtonClick"
+            android:src="@mipmap/ic_launcher"
+            android:background="@android:color/transparent"/>
+        <ImageButton
+            android:id="@+id/category_6"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:onClick="onButtonClick"
+            android:src="@mipmap/ic_launcher"
+            android:background="@android:color/transparent"/>
+        <ImageButton
+            android:id="@+id/category_7"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:onClick="onButtonClick"
+            android:src="@mipmap/ic_launcher"
+            android:background="@android:color/transparent"/>
+
+    </LinearLayout>
+
+  <!--  <fragment
+        class="com.example.yesorno.BrainteaserCategoryFragment"
+    android:id="@+id/category_frag"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1">
+    </fragment>
+-->
 
     <FrameLayout
         android:id="@+id/list_frag_container"
@@ -19,5 +99,6 @@
         android:layout_height="match_parent"
         android:layout_weight="3"
         />
+ </fragment>
 
 </LinearLayout>

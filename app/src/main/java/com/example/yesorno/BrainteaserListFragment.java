@@ -34,7 +34,7 @@ public class BrainteaserListFragment extends ListFragment {
         }
 
         ArrayAdapter brainteaserListAdapter = new
-                ArrayAdapter(inflater.getContext(), android.R.layout.simple_list_item_1, brainteaserList);
+                ArrayAdapter(inflater.getContext(), R.layout.category_list_style, brainteaserList);
         setListAdapter(brainteaserListAdapter);
 
         return super.onCreateView(inflater, container, savedInstanceState);

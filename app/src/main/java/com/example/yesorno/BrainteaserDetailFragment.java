@@ -30,6 +30,7 @@ public class BrainteaserDetailFragment extends Fragment {
             title.setText(brainteaser.getName());
             TextView description = (TextView) view.findViewById(R.id.textDescription);
             description.setText(brainteaser.getDescription());
+
         }
     }
 

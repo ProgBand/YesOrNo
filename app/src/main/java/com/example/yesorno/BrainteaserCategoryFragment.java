@@ -30,7 +30,7 @@ public class BrainteaserCategoryFragment extends ListFragment {
         }
 
         ArrayAdapter<String> categoryNamesAdapter = new ArrayAdapter<String>(
-                inflater.getContext(), android.R.layout.simple_list_item_1, categoryNames);
+                inflater.getContext(),R.layout.category_list_style, categoryNames);
         setListAdapter(categoryNamesAdapter);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
@@ -40,6 +40,8 @@ public class BrainteaserCategoryFragment extends ListFragment {
         super.onAttach(activity);
         this.listener = (BrainteaserCategoryListener) activity;
     }
+
+
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {

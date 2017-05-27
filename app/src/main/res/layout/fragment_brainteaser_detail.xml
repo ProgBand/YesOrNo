@@ -5,6 +5,11 @@
     android:orientation="vertical"
     tools:context="com.example.yesorno.BrainteaserDetailFragment">
 
+    <ImageView
+        android:id="@+id/imageDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <TextView
         android:id="@+id/textTitle"
         android:layout_width="match_parent"
@@ -20,9 +25,9 @@
 
     <Button
         android:id="@+id/answerButton"
-        android:layout_gravity="bottom|center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/answer"
-        android:onClick="onAnswerButtonClick"/>
+        android:layout_gravity="bottom|center"
+        android:text="@string/answer" />
+
 </LinearLayout>

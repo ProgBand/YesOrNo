@@ -7,36 +7,54 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.example.yesorno.dao.BrainteaserDaoWebImpl;
+import com.example.yesorno.model.Brainteaser;
+import com.example.yesorno.util.ObjectOutputCache;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BrainteaserListFragment extends ListFragment {
 
-    private long brainteaserCategoryId = 0;
+    private long brainteaserCategoryId = 1;
+    private BrainteaserListListener listener;
 
     interface BrainteaserListListener {
         void itemClicked(long listId, long categoryId);
     }
 
-    private BrainteaserListListener listener;
-
     public BrainteaserListFragment() {
+
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        BrainteaserDaoWebImpl.getApi().getByCategory((int) brainteaserCategoryId).enqueue(new Callback<List<Brainteaser>>() {
+            @Override
+            public void onResponse(Call<List<Brainteaser>> call, Response<List<Brainteaser>> response) {
+                ArrayList<Brainteaser> brainteasers = new ArrayList<Brainteaser>();
+                brainteasers.addAll(response.body());
 
-        String[] brainteaserList = new String[Brainteaser.brainteasers[(int) brainteaserCategoryId].length];
-        for (int i = 0; i < brainteaserList.length; i++) {
-            brainteaserList[i]=Brainteaser.brainteasers[(int) brainteaserCategoryId][i].getName();
-        }
+                ObjectOutputCache writer = new ObjectOutputCache("brainList.ser", getContext());
+                writer.cacheWriter(brainteasers);
 
-        ArrayAdapter brainteaserListAdapter = new
-                ArrayAdapter(inflater.getContext(), R.layout.category_list_style, brainteaserList);
-        setListAdapter(brainteaserListAdapter);
+                BrainteaserAdapter brainteaserAdapter =
+                        new BrainteaserAdapter(inflater.getContext(), R.layout.custom_activity_list_item, R.id.title, brainteasers);
+                setListAdapter(brainteaserAdapter);
+            }
 
+            @Override
+            public void onFailure(Call<List<Brainteaser>> call, Throwable t) {
+
+            }
+        });
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 

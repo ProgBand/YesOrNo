@@ -1,0 +1,20 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/activatedBackgroundIndicator"
+    android:paddingTop="1dip"
+    android:paddingBottom="1dip"
+    android:paddingStart="8dip"
+    android:paddingEnd="8dip">
+
+    <TextView android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart" />
+
+    <ImageView android:id="@+id/icon"
+        android:layout_gravity="right"
+        android:layout_width="24dip"
+        android:layout_height="24dip" />
+</LinearLayout>

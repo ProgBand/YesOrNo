@@ -1,15 +1,24 @@
 package com.example.yesorno;
 
-
-import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-import android.widget.Toast;
 
-public class MainActivity extends FragmentActivity
-        implements BrainteaserListFragment.BrainteaserListListener, BrainteaserCategoryFragment.BrainteaserCategoryListener{
+import com.example.yesorno.dao.BrainteaserDaoWebImpl;
+import com.example.yesorno.model.Brainteaser;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import me.yokeyword.swipebackfragment.SwipeBackActivity;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+public class MainActivity extends SwipeBackActivity
+        implements BrainteaserListFragment.BrainteaserListListener{
+    private ArrayList<Brainteaser> brainteasers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,62 +26,50 @@ public class MainActivity extends FragmentActivity
         BrainteaserListFragment brainteaserList = new BrainteaserListFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.list_frag_container, brainteaserList);
-        ft.addToBackStack(null);
         ft.commit();
         setContentView(R.layout.activity_main);
+        setSwipeBackEnable(false);
     }
 
     @Override
     public void itemClicked(long listId, long categoryId) {
-        Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(DetailActivity.EXTRA_BRAINTEASER_ID, (int) listId);
-        intent.putExtra(DetailActivity.EXTRA_BRAINTEASER_CATEGORY_ID, (int) categoryId);
-        startActivity(intent);
+        BrainteaserDetailFragment brainteaserDetail = new BrainteaserDetailFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        brainteaserDetail.setBrainteaserId((int) listId);
+        brainteaserDetail.setBrainteaserCategoryId((int) categoryId);
+        ft.replace(R.id.brainteaser_category_frag, brainteaserDetail);
+        ft.addToBackStack(null);
+        ft.commit();
     }
 
-    @Override
     public void categoryClicked(long id) {
         BrainteaserListFragment brainteaserList = new BrainteaserListFragment();
         brainteaserList.setBrainteaserCategoryId(id);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.list_frag_container, brainteaserList);
-        ft.addToBackStack(null);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.replace(R.id.list_frag_container, brainteaserList);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.addToBackStack(null);
         ft.commit();
     }
 
     public void onButtonClick(View view) {
-
         switch (view.getId()) {
             case R.id.category_1:
-                categoryClicked(0);
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        "Первая категория", Toast.LENGTH_SHORT);
-                toast.show();
+                categoryClicked(1);
                 break;
             case R.id.category_2:
-                categoryClicked(1);
-                Toast toast2 = Toast.makeText(getApplicationContext(),
-                        "2 категория", Toast.LENGTH_SHORT);
-                toast2.show();
+                categoryClicked(2);
                 break;
             case R.id.category_3:
-                categoryClicked(2);
-                Toast toast3 = Toast.makeText(getApplicationContext(),
-                        "3 категория", Toast.LENGTH_SHORT);
-                toast3.show();
+                categoryClicked(3);
                 break;
             case R.id.category_4:
-                categoryClicked(3);
-                Toast toast4 = Toast.makeText(getApplicationContext(),
-                        "4 категория", Toast.LENGTH_SHORT);
-                toast4.show();
+                categoryClicked(4);
                 break;
             case R.id.category_5:
-                categoryClicked(4);
-                Toast toast5 = Toast.makeText(getApplicationContext(),
-                        "5 категория", Toast.LENGTH_SHORT);
-                toast5.show();
+                categoryClicked(5);
                 break;
         }
     }
